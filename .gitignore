@@ -73,3 +73,5 @@ config.js
 !/plugins/example.js.example
 
 /data/custom/*
+
+nbproject
