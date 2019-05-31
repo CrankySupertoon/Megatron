@@ -1,0 +1,52 @@
+{
+  "name": "fearedbot",
+  "version": "3.3.0",
+  "description": "my new discord.js bot",
+  "private": true,
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "setup": "node setup.js",
+    "startpm2": "pm2 start app.js --name=\"FearedBot\"",
+    "restart": "pm2 restart FearedBot",
+    "stoppm2": "pm2 stop FearedBot",
+    "start": "node app.js",
+    "log": "pm2 logs",
+    "logs": "pm2 logs",
+    "startlog": "pm2 start app.js --name=\"FearedBot\" && pm2 logs",
+    "watch": "pm2 start app.json --name=\"FearedBot\" --watch && pm2 logs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tohur-Xbl/FearedBot.git"
+  },
+  "author": "Tohur#7224",
+  "contributors": [
+    "Tohur (https://github.com/Tohur-Xbl/)"
+  ],
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Tohur-Xbl/FearedBot/issues"
+  },
+  "homepage": "https://github.com/Tohur-Xbl/FearedBot",
+  "dependencies": {
+    "better-sqlite-pool": "^0.2.2",
+    "better-sqlite3": "^5.4.0",
+    "discord.js": "github:discordjs/discord.js",
+    "enmap": "^4.8.4",
+    "glob": "^7.1.3",
+    "logger": "github:zfbx/logger",
+    "mathjs": "^5.9.0",
+    "node-cron": "^2.0.3",
+    "node-fetch": "^2.3.0",
+    "time": "^0.12.0"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.0",
+    "zlib-sync": "^0.1.4",
+    "erlpack": "github:discordapp/erlpack",
+    "pm2": "^2.10.4"
+  }
+}
