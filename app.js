@@ -96,7 +96,7 @@ loadCommands('Search');
 loadCommands('Utility');
 loadCommands('XP');
 
-client.on('ready', (message) => require('./events/readyAndCron')(client, message));
+client.on('ready', () => require('./events/readyAndCron')(client));
 client.on('message', (message, member) => require('./events/message')(client, message, member));
 client.on('messageUpdate', (oldMessage, newMessage) => require('./events/message')(client, newMessage, oldMessage));
 client.on('guildCreate', guild => require('./events/guildCreate')(client, guild));

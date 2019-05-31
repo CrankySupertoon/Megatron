@@ -1,6 +1,6 @@
 exports.run = async (client, message, args) => {
     client.guildDB.ensure(message.guild.id, client.guildDBDefaults);
-    client.guildDB.set(message.guild.id, "", "logChannel");
+    client.guildDB.set(message.guild.id, "", "welcomeChannel");
     message.react('✅');
 };
 
