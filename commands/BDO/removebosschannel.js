@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
 
 exports.info = {
     name: 'removebossalerts',
-    aliases: ['rembossch'],
+    aliases: ['removeboss', 'removebosschannel'],
     usage: ["removebossalerts"],
     module: "BDO",
     nsfw: false,
@@ -14,5 +14,5 @@ exports.info = {
     ownerOnly: false,
     requires: ['MANAGE_CHANNELS'],
     botPermissions: ['SEND_MESSAGES'],
-    description: "Remove new user welcome message from the server"
+    description: "Remove new boss alerts message from the server"
 };
