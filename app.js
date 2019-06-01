@@ -114,10 +114,10 @@ client.on('warn', warn => require('./events/warn')(client, warn));
 client.on('error', err => require('./events/error')(client, err));
 
 
-glob(`plugins/*.js`, (err, files) => {
+glob(`modules/*.js`, (err, files) => {
     if (err) console.error(err);
     var plural = (files.length > 1) ? "s" : "";
-    client.log.info(`${files.length} Plugin${plural} Found.`);
+    client.log.info(`${files.length} Module${plural} Found.`);
     files.forEach(f => {
         client.log.info(`Loading ${f}`);
         require(`./${f}`)(client);

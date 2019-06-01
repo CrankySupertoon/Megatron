@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const superagent = require('superagent');
 const Discord = require('discord.js');
 const cronjob = require('node-cron');
 
@@ -30,6 +31,18 @@ function setRandomActivity(client) {
     }
 }
 
+function discordBotlist(client) {
+    if (client.config.DBLCOM_BOT_ID !== "" && client.config.DBLCOM_TOKEN !== "") {
+        superagent.post(`https://discordbotlist.com/api/bots/${client.config.DBLCOM_BOT_ID}/stats`)
+                .set("Authorization", `Bot ${client.config.DBLCOM_TOKEN}`)
+                .send({shard_id: 0,
+                    guilds: client.guilds.size,
+                    users: client.users.size,
+                    voice_connections: client.voiceConnections.size
+                })
+                .then(() => client.log.info('discordbotlist.com updated'))
+    }
+}
 function checkTwitchStreams(client) {
     var chans = client.twitchDB.indexes;
     for (i = 0; i < chans.length; i++) {
