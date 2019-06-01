@@ -6,8 +6,8 @@
 [Command List](https://bot.feared.xyz) | [Discord Server](https://discord.gg/vxN9MWh)
 
 ## About
-Meet FearedBot, a discord bot built to be modular and easy to expand upon through Javascript using Discord.js. This project is the evolution of a previous project named Kuroyukihime that was my first big jump into node.js. This project is very special to me and used by myself aswell as many of my friends. I try my best to add features that are requested but I'm just one person so it might take me a little while depending on the complexity or I could do it in 5 minutes. If there's anything you would like to see request it [here](https://github.com/Tohur-Xbl/FearedBot/issues/new)
-FearedBot is a fork of Yuno another awesome discord bot!
+Meet FearedBot, a discord bot built to be modular and easy to expand upon through Javascript using Discord.js. This project is a fork of [Yuno](https://github.com/zfbx/Yuno) another great Discord bot for general purposes I try my best to add features that are requested but I'm just one person so it might take me a little while depending on the complexity or I could do it in 5 minutes. If there's anything you would like to see request it [here](https://github.com/Tohur-Xbl/FearedBot/issues/new)
+FearedBot is a fork of [Yuno](https://github.com/zfbx/Yuno) another awesome discord bot!
 
 ### Features
 **Event Logging**
