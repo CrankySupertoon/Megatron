@@ -3,7 +3,7 @@
 
 ## Important Links
 
-[Command List](https://bot.feared.xyz) | [Discord Server](https://discord.gg/vxN9MWh)
+[Command List](https://tohur-xbl.github.io/Megatron/) | [Discord Server](https://discord.gg/vxN9MWh)
 
 ## About
 Meet Megatron, a discord bot built to be modular and easy to expand upon through Javascript using Discord.js. This project is a fork of [Yuno](https://github.com/zfbx/Yuno) another great Discord bot for general purposes I try my best to add features that are requested but I'm just one person so it might take me a little while depending on the complexity or I could do it in 5 minutes. If there's anything you would like to see request it [here](https://github.com/Tohur-Xbl/Megatron/issues/new)
