@@ -1,5 +1,5 @@
 {
-  "name": "fearedbot",
+  "name": "megatron",
   "version": "3.3.0",
   "description": "my new discord.js bot",
   "private": true,
@@ -9,18 +9,18 @@
   },
   "scripts": {
     "setup": "node setup.js",
-    "startpm2": "pm2 start app.js --name=\"FearedBot\"",
-    "restart": "pm2 restart FearedBot",
-    "stoppm2": "pm2 stop FearedBot",
+    "startpm2": "pm2 start app.js --name=\"Megatron\"",
+    "restart": "pm2 restart Megatron",
+    "stoppm2": "pm2 stop Megatron",
     "start": "node app.js",
     "log": "pm2 logs",
     "logs": "pm2 logs",
-    "startlog": "pm2 start app.js --name=\"FearedBot\" && pm2 logs",
-    "watch": "pm2 start app.json --name=\"FearedBot\" --watch && pm2 logs"
+    "startlog": "pm2 start app.js --name=\"Megatron\" && pm2 logs",
+    "watch": "pm2 start app.json --name=\"Megatron\" --watch && pm2 logs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Tohur-Xbl/FearedBot.git"
+    "url": "git+https://github.com/Tohur-Xbl/Megatron.git"
   },
   "author": "Tohur#7224",
   "contributors": [
@@ -28,9 +28,9 @@
   ],
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/Tohur-Xbl/FearedBot/issues"
+    "url": "https://github.com/Tohur-Xbl/Megatron/issues"
   },
-  "homepage": "https://github.com/Tohur-Xbl/FearedBot",
+  "homepage": "https://github.com/Tohur-Xbl/Megatron",
   "dependencies": {
     "better-sqlite-pool": "^0.2.2",
     "better-sqlite3": "^5.4.0",

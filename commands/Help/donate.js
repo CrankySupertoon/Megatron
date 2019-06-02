@@ -1,4 +1,4 @@
-var msg = `A lot of work goes into FearedBot , and if you would really help support this as well as more work like this you can send a donation through **Paypal** (<https://www.paypal.me/tohur>)\nThank you so much for your support in regardless, even if just by using FearedBot yourself ♥`;
+var msg = `A lot of work goes into Megatron , and if you would really help support this as well as more work like this you can send a donation through **Paypal** (<https://www.paypal.me/tohur>)\nThank you so much for your support in regardless, even if just by using Megatron yourself ♥`;
 
 
 exports.run = async (client, message, args) => {

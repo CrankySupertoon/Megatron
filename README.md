@@ -1,18 +1,18 @@
 
- * Default Prefix: `!` or `@Feared  Bot#5349`
+ * Default Prefix: `!` or `@Megatron#5349`
 
 ## Important Links
 
 [Command List](https://bot.feared.xyz) | [Discord Server](https://discord.gg/vxN9MWh)
 
 ## About
-Meet FearedBot, a discord bot built to be modular and easy to expand upon through Javascript using Discord.js. This project is a fork of [Yuno](https://github.com/zfbx/Yuno) another great Discord bot for general purposes I try my best to add features that are requested but I'm just one person so it might take me a little while depending on the complexity or I could do it in 5 minutes. If there's anything you would like to see request it [here](https://github.com/Tohur-Xbl/FearedBot/issues/new)
-FearedBot is a fork of [Yuno](https://github.com/zfbx/Yuno) another awesome discord bot!
+Meet Megatron, a discord bot built to be modular and easy to expand upon through Javascript using Discord.js. This project is a fork of [Yuno](https://github.com/zfbx/Yuno) another great Discord bot for general purposes I try my best to add features that are requested but I'm just one person so it might take me a little while depending on the complexity or I could do it in 5 minutes. If there's anything you would like to see request it [here](https://github.com/Tohur-Xbl/Megatron/issues/new)
+Megatron is a fork of [Yuno](https://github.com/zfbx/Yuno) another awesome discord bot!
 
 ### Features
 **Event Logging**
 
-create a private channel and type `!logchannel` for FearedBot to use that channel to log all events that happen on the server like new members, deleted message, role changes, etc.
+create a private channel and type `!logchannel` for Megatron to use that channel to log all events that happen on the server like new members, deleted message, role changes, etc.
 
 **Auto Role**
 
@@ -20,7 +20,7 @@ Give a specified role to new users automatically when they join using `!autorole
 
 **Twitch Live alerts**
 
-Want a certain twitch stream to alert in a channel when it's live with a preview, title and current game? Just type `!twitch TwitchChannelname` in the channel you want alerts and FearedBot will monitor that for you!
+Want a certain twitch stream to alert in a channel when it's live with a preview, title and current game? Just type `!twitch TwitchChannelname` in the channel you want alerts and Megatron will monitor that for you!
 
 **Accept Terms for Role**
 
@@ -32,7 +32,7 @@ If you want to protect your server more from bots or force people to read and ac
 
 ## Contribute
 
-FearedBot is maintained with ♥️ in my free time. If you'd like to contribute but aren't good with code, you can send a small donation!
+Megatron is maintained with ♥️ in my free time. If you'd like to contribute but aren't good with code, you can send a small donation!
 
 [![Tip with PayPal](https://img.shields.io/badge/PayPal-Buy_me...-lightgrey.svg)](https://www.paypal.me/tohur)
 [![Tip with PayPal](https://img.shields.io/badge/soda-%245-green.svg)](https://www.paypal.me/tohur/5)
@@ -42,7 +42,7 @@ FearedBot is maintained with ♥️ in my free time. If you'd like to contribute
 [![Tip with PayPal](https://img.shields.io/badge/custom_amount-...-lightgrey.svg)](https://www.paypal.me/tohur)
 
 Otherwise you can add or fix features. I would greatly appreciate it.
-1. Make pull requests to the [**Master Branch**](https://github.com/Tohur-Xbl/FearedBot/tree/master).
+1. Make pull requests to the [**Master Branch**](https://github.com/Tohur-Xbl/Megatron/tree/master).
 2. Keep each pull request to a single feature or fix.
 3. Please explain what you did in the PR message.
 

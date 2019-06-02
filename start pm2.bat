@@ -1,1 +1,1 @@
-pm2 start app.js --name "FearedBot"
+pm2 start app.js --name "Megatron"
