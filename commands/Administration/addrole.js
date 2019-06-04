@@ -1,42 +1,28 @@
 const Discord = require('discord.js');
 
 exports.run = async (client, message, args) => {
-  try {
-    const user = message.mentions.users.first();
-    
-    if (!message.guild.roles.find(r => r.name == args.slice(1).join(' '))) return message.reply('That\'s not a role!');
-    if (user) {
-      if (message.guild.members.get(message.author.id).highestRole.name == '@everyone') message.reply('The role you are trying to add is above your highest role\'s position!');
-      else {
-        if (Number(message.member.highestRole.position) >= Number(message.guild.roles.find(r => r.name == args.slice(1).join(' ')).position)) {
-          if (message.member.hasPermission('MANAGE_ROLES')) {
-              const member = message.guild.member(user);
-              if (member) {
-                if (message.guild.roles.find(r => r.name == args.slice(1).join(' '))) {
-                  member.addRole(message.guild.roles.find(r => r.name == args.slice(1).join(' '))).then(() => {
-                    message.reply(`Successfully added Role to ${user.tag}`);
+    //!addrole @andrew Dog Person
+    if (!message.member.hasPermission("MANAGE_MEMBERS"))
+        return message.reply("Sorry pal, you can't do that.");
+    let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+    if (!rMember)
+        return message.reply("Couldn't find that user, yo.");
+    let role = args.join(" ").slice(22);
+    if (!role)
+        return message.reply("Specify a role!");
+    let gRole = message.guild.roles.find(role => role.name === role);
+    if (!gRole)
+        return message.reply("Couldn't find that role.");
 
-                    var logChannelId = client.guildDB.get(message.guild.id, "logChannel");
-                    if (logChannelId) {
-                        if (logServer) {
-                            logServer = message.guild.channels.get(logChannelId);
-                            const embed = new Discord.MessageEmbed()
-                                    .setTitle('Add Role')
-                                    .setColor('#eeeeee')
-                                    .setDescription(`Name: ${user.username}\nID: ${user.id}\nModerator: ${message.author.username}`);
-                            logServer.send({embed});
-                        }
-                    }
-                  }).catch('There was an error!');
-                } else message.reply('I can\'t find that role!');
-              } else message.reply('That user isn\'t in this guild!');
-          } else message.reply('You don\'t have the Manage Roles permission!');
-        } else message.reply('The role you are trying to add is above your highest role\'s position!');
-      }
-    } else message.reply('You didn\'t mention the user to add the role to!');
-  } catch (err) {
-    message.channel.send('There was an error!\n' + err.stack).catch();
-  }
+    if (rMember.roles.has(gRole.id))
+        return message.reply("They already have that role.");
+    await(rMember.addRole(gRole.id));
+
+    try {
+        await rMember.send(`Congrats, you have been given the role ${gRole.name}`)
+    } catch (e) {
+        message.channel.send(`Congrats to <@${rMember.id}>, they have been given the role ${gRole.name}. We tried to DM them, but their DMs are locked.`)
+    }
 };
 
 exports.info = {
