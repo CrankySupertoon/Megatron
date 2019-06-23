@@ -3,6 +3,7 @@ module.exports = {
     'ownerid': [''], // Owner's Discord User ID(s)
     'ownerlogging': true, // Log online messages in DM to the first Owner?
     'prefix': '!', // prefix to get the bots attention ex: .command
+    'botname': '', // The bots name
     "loglevel": 'INFO', // DEBUG > INFO > WARN > ERROR
     'embedcolor': 16755385, // hex color converted to dec for embeds and username
     "twitchClientId": "",
