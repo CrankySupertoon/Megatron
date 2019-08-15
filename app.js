@@ -22,6 +22,12 @@ client.twitchDB = new Enmap({
     autoFetch: true,
     cloneLevel: 'deep'  
 });
+client.mixerDB = new Enmap({
+    name: "mixerDB",
+    fetchAll: true,
+    autoFetch: true,
+    cloneLevel: 'deep'
+});
 client.userDB = new Enmap({ 
     name: "userDB",
     fetchAll: false,

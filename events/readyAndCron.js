@@ -21,6 +21,7 @@ function eventTimer(client) {
     //console.log('Event Running');
     setRandomActivity(client);
     checkTwitchStreams(client);
+    checkMixerStreams(client);
 }
 
 function setRandomActivity(client) {
@@ -77,6 +78,50 @@ function checkTwitchStreams(client) {
                     client.channels.get(user.channels[j]).send(`Hey @everyone, ${ch.channel.display_name} is live!`, {embed});
                 }
                 client.twitchDB.setProp(chan, 'sent', true);
+                return;
+            }
+        });
+
+    }
+}
+function checkMixerStreams(client) {
+    var chans = client.mixerDB.indexes;
+    for (i = 0; i < chans.length; i++) {
+        const chan = chans[i];
+        const user = client.mixerDB.get(chan);
+        if (!(user.channels.length > 0)) {
+            client.mixerDB.delete(chan);
+            return;
+        }
+        fetch(`https://mixer.com/api/v1/channels/${chan}`, {
+            headers: {'Client-ID': client.config.mixerClientId},
+        }).then(res => res.json()).then(json => {
+            if (json.online === 'true') {
+                if (user.sent)
+                    client.mixerDB.setProp(chan, 'sent', false);
+                return;
+            } else {
+                if (user.sent)
+                    return; // post has already been sent, don't sent again
+                ch = json;
+                Url = `https://mixer.com/${chan}`;
+                const embed = new Discord.MessageEmbed()
+                    .setAuthor(ch.name, null, Url)
+                    .setColor(client.config.embedcolor)
+                    .setTitle(`${ch.user.username}\n${Url}`)
+                    .setURL(Url)
+                    .setThumbnail(ch.user.avatarUrl)
+                    .setImage(ch.type.coverUrl)
+                    .addField("Streaming", ch.type.name, true)
+                    .addField("Viewers", `**${ch.viewersCurrent}**`, true)
+                    .addField("Total Views", `**${ch.viewersTotal}**`, true)
+                    .addField("Followers", `**${ch.numFollowers}**`, true)
+                    .setFooter(`${(ch.partnered ? " | Partnered" : "")}`);
+
+                for (j = 0; j < user.channels.length; j++) {
+                    client.channels.get(user.channels[j]).send(`Hey @everyone, ${ch.user.username} is live!`, {embed});
+                }
+                client.mixerDB.setProp(chan, 'sent', true);
                 return;
             }
         });
