@@ -7,6 +7,12 @@ module.exports = {
     "loglevel": 'INFO', // DEBUG > INFO > WARN > ERROR
     'embedcolor': 16755385, // hex color converted to dec for embeds and username
     "twitchClientId": "",
+    "mixerClientId": "",
+    "twitter_consumer_key": "",
+    "twitter_consumer_secret": "",
+    "twitter_token_key": "",
+    "twitter_token_secret": "",
+    "twitter_discord_channelid": "",
     "DBLCOM_BOT_ID": "",
     "DBLCOM_TOKEN": "",
     "statusList": [

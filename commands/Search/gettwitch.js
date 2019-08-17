@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 
 exports.run = async (client, message, args) => {
     if (!args[0]) {
-        return message.channel.send(`Please provide the name of the channel to search. Example: ${client.config.prefix}twitch zfbx`);
+        return message.channel.send(`Please provide the name of the channel to search. Example: ${client.config.prefix}twitch tohur`);
     }
     var stream = args[0].replace(/[^0-9\.\_\-a-zA-Z]/g, '');
     fetch(`https://api.twitch.tv/kraken/streams/${stream}`, {
@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
 exports.info = {
     name: 'gettwitch',
     aliases: [],
-    usage: ['gettwitch zfbx'],
+    usage: ['gettwitch tohur'],
     module: "Search",
     nsfw: false,
     serverOnly: false,

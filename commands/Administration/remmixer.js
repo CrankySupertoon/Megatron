@@ -1,9 +1,9 @@
 exports.run = async (client, message, args) => {
     if (!args[0])
-        return message.channel.send(`Please provide the name of the channel to remove. Example: ${client.config.prefix}mixer zfbx`);
+        return message.channel.send(`Please provide the name of the channel to remove. Example: ${client.config.prefix}mixer tohur`);
 
     if (args[0].toLowerCase().includes('mixer.com'))
-        return message.channel.send(`please only put the name of the channel example: ${client.config.prefix}mixer zfbx`);
+        return message.channel.send(`please only put the name of the channel example: ${client.config.prefix}mixer tohur`);
 
     var stream = args[0].toLowerCase().replace(/[^0-9\_\-a-z]/g, '');
 
@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
 exports.info = {
     name: 'remmixer',
     aliases: [],
-    usage: ["remmixer zfbx"],
+    usage: ["remmixer tohur"],
     module: "Administration",
     nsfw: false,
     serverOnly: false,

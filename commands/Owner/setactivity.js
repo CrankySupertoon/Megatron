@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
 exports.info = {
     name: 'setactivity',
     aliases: ['game', 'setgame'],
-    usage: ["setactivity PLAYING Minecraft", "setactivity STREAMING https://twitch.tv/zfbx Grand Theft Auto V"],
+    usage: ["setactivity PLAYING Minecraft", "setactivity STREAMING https://twitch.tv/tohur Grand Theft Auto V"],
     module: "Owner",
     nsfw: false,
     serverOnly: false,

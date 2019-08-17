@@ -34,15 +34,60 @@ function setRandomActivity(client) {
 function discordBotlist(client) {
     if (client.config.DBLCOM_BOT_ID !== "" && client.config.DBLCOM_TOKEN !== "") {
         superagent.post(`https://discordbotlist.com/api/bots/${client.config.DBLCOM_BOT_ID}/stats`)
-                .set("Authorization", `Bot ${client.config.DBLCOM_TOKEN}`)
-                .send({shard_id: 0,
-                    guilds: client.guilds.size,
-                    users: client.users.size,
-                    voice_connections: client.voiceConnections.size
-                })
-                .then(() => client.log.info('discordbotlist.com updated'))
+            .set("Authorization", `Bot ${client.config.DBLCOM_TOKEN}`)
+            .send({
+                shard_id: 0,
+                guilds: client.guilds.size,
+                users: client.users.size,
+                voice_connections: client.voiceConnections.size
+            })
+            .then(() => client.log.info('discordbotlist.com updated'))
     }
 }
+
+function twitterFeeds(client) {
+    ////
+    // Twitter configuration
+    const Twit = require('twit')
+    const twitter = new Twit({
+        consumer_key: config.twitter['consumer_key'],
+        consumer_secret: config.twitter['consumer_secret'],
+        access_token: config.twitter['token_key'],
+        access_token_secret: config.twitter['token_secret']
+    })
+    ////
+    var twitterHandles = client.twitterDB.indexes;
+    for (i = 0; i < chans.length; i++) {
+        const twitterHandle = twitterHandles[i];
+        const user = client.twitterDB.get(twitterHandle);
+        if (!(user.channels.length > 0)) {
+            client.twitterDB.delete(twitterHandle);
+            return;
+        }
+        ////
+        // Stream configuration
+        for (j = 0; j < user.channels.length; j++) {
+            let stream = twitter.stream('user', {id: twitterHandle})
+            stream.on('tweet', (tweet) => {
+                if (tweet.hasOwnProperty('retweeted_status')) return;
+                logger.debug(`Received tweet: ${tweet}`)
+                client.channels
+                    .get(user.channels[j])
+                    .send({
+                        embed: {
+                            author: {
+                                name: tweet.user.name,
+                                icon_url: tweet.user.profile_image_url_https,
+                                url: `https://twitter.com/statuses/${tweet.id_str}`
+                            },
+                            description: tweet.text
+                        }
+                    })
+            })
+        }
+    }
+}
+
 function checkTwitchStreams(client) {
     var chans = client.twitchDB.indexes;
     for (i = 0; i < chans.length; i++) {
@@ -64,18 +109,18 @@ function checkTwitchStreams(client) {
                     return; // post has already been sent, don't sent again
                 ch = json.stream;
                 const embed = new Discord.MessageEmbed()
-                        .setAuthor(ch.channel.status, null, ch.channel.url)
-                        .setColor(client.config.embedcolor)
-                        .setTitle(`${ch.channel.display_name}\n${ch.channel.url}`)
-                        .setURL(ch.channel.url)
-                        .setThumbnail(ch.channel.logo)
-                        .setImage(`${ch.preview.large}?ver=${Math.floor(Math.random() * 100000)}`)
-                        .addField("Streaming", ch.game, true)
-                        .addField("Viewers", `**${ch.viewers}**`, true)
-                        .setFooter(`${ch.channel.followers} followers${(ch.channel.partner ? " | Partnered" : "")}${(ch.channel.mature ? " | Mature Stream" : "")}`);
+                    .setAuthor(ch.channel.status, null, ch.channel.url)
+                    .setColor(client.config.embedcolor)
+                    .setTitle(`${ch.channel.display_name}\n${ch.channel.url}`)
+                    .setURL(ch.channel.url)
+                    .setThumbnail(ch.channel.logo)
+                    .setImage(`${ch.preview.large}?ver=${Math.floor(Math.random() * 100000)}`)
+                    .addField("Streaming", ch.game, true)
+                    .addField("Viewers", `**${ch.viewers}**`, true)
+                    .setFooter(`${ch.channel.followers} followers${(ch.channel.partner ? " | Partnered" : "")}${(ch.channel.mature ? " | Mature Stream" : "")}`);
 
                 for (j = 0; j < user.channels.length; j++) {
-                    client.channels.get(user.channels[j]).send(`Hey @everyone, ${ch.channel.display_name} is live!`, {embed});
+                    client.channels.get(user.channels[j]).send(`Hey @everyone, ${ch.channel.display_name} is live on twitch!`, {embed});
                 }
                 client.twitchDB.setProp(chan, 'sent', true);
                 return;
@@ -84,6 +129,7 @@ function checkTwitchStreams(client) {
 
     }
 }
+
 function checkMixerStreams(client) {
     var chans = client.mixerDB.indexes;
     for (i = 0; i < chans.length; i++) {
@@ -96,7 +142,7 @@ function checkMixerStreams(client) {
         fetch(`https://mixer.com/api/v1/channels/${chan}`, {
             headers: {'Client-ID': client.config.mixerClientId},
         }).then(res => res.json()).then(json => {
-            if (json.online === 'true') {
+            if (json.online == false) {
                 if (user.sent)
                     client.mixerDB.setProp(chan, 'sent', false);
                 return;
@@ -116,10 +162,10 @@ function checkMixerStreams(client) {
                     .addField("Viewers", `**${ch.viewersCurrent}**`, true)
                     .addField("Total Views", `**${ch.viewersTotal}**`, true)
                     .addField("Followers", `**${ch.numFollowers}**`, true)
-                    .setFooter(`${(ch.partnered ? " | Partnered" : "")}`);
+                    .setFooter(`Tohur_Bot`);
 
                 for (j = 0; j < user.channels.length; j++) {
-                    client.channels.get(user.channels[j]).send(`Hey @everyone, ${ch.user.username} is live!`, {embed});
+                    client.channels.get(user.channels[j]).send(`Hey @everyone, ${ch.user.username} is live on mixer!`, {embed});
                 }
                 client.mixerDB.setProp(chan, 'sent', true);
                 return;

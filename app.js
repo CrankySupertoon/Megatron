@@ -28,6 +28,12 @@ client.mixerDB = new Enmap({
     autoFetch: true,
     cloneLevel: 'deep'
 });
+client.twitterDB = new Enmap({
+    name: "twitterDB",
+    fetchAll: true,
+    autoFetch: true,
+    cloneLevel: 'deep'
+});
 client.userDB = new Enmap({ 
     name: "userDB",
     fetchAll: false,
