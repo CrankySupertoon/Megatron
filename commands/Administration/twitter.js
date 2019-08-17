@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
 
     var stream = args[0].toLowerCase().replace(/[^0-9\_\-a-z]/g, '');
 
-    client.twitterDB.ensure(stream, {sent: false, channels: []});
+    client.twitterDB.ensure(stream, {last: "", channels: []});
 
     //if(client.twitterDB.hasProp(stream, message.channel.id))
     //return message.channel.send(`This channel is already configured to recieve live alerts from that twitter account.`);

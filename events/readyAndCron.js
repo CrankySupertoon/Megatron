@@ -20,6 +20,7 @@ module.exports = (client) => {
 function eventTimer(client) {
     //console.log('Event Running');
     setRandomActivity(client);
+    twitterFeeds(client);
     checkTwitchStreams(client);
     checkMixerStreams(client);
 }
@@ -50,41 +51,51 @@ function twitterFeeds(client) {
     // Twitter configuration
     const Twit = require('twit')
     const twitter = new Twit({
-        consumer_key: config.twitter['consumer_key'],
-        consumer_secret: config.twitter['consumer_secret'],
-        access_token: config.twitter['token_key'],
-        access_token_secret: config.twitter['token_secret']
+        consumer_key: client.config.twitter_consumer_key,
+        consumer_secret: client.config.twitter_consumer_secret,
+        access_token: client.config.twitter_token_key,
+        access_token_secret: client.config.twitter_token_secret
     })
     ////
     var twitterHandles = client.twitterDB.indexes;
-    for (i = 0; i < chans.length; i++) {
+    for (i = 0; i < twitterHandles.length; i++) {
         const twitterHandle = twitterHandles[i];
         const user = client.twitterDB.get(twitterHandle);
         if (!(user.channels.length > 0)) {
             client.twitterDB.delete(twitterHandle);
+            client.log.info('Twitter user removed');
             return;
         }
         ////
         // Stream configuration
-        for (j = 0; j < user.channels.length; j++) {
-            let stream = twitter.stream('user', {id: twitterHandle})
-            stream.on('tweet', (tweet) => {
-                if (tweet.hasOwnProperty('retweeted_status')) return;
-                logger.debug(`Received tweet: ${tweet}`)
-                client.channels
-                    .get(user.channels[j])
-                    .send({
-                        embed: {
-                            author: {
-                                name: tweet.user.name,
-                                icon_url: tweet.user.profile_image_url_https,
-                                url: `https://twitter.com/statuses/${tweet.id_str}`
-                            },
-                            description: tweet.text
-                        }
-                    })
-            })
-        }
+        var options = {
+            screen_name: twitterHandle,
+            count: 1
+        };
+        twitter.get('statuses/user_timeline', options, function (err, tweet) {
+            for (var i = 0; i < tweet.length; i++) {
+                if (user.last == tweet[i].id_str) {
+                    client.log.info('Tweet already sent');
+                } else {
+                    client.log.info('Tweet posted to discord');
+                    const embed = new Discord.MessageEmbed()
+                        .setAuthor(tweet[i].user.name)
+                        .setColor(client.config.embedcolor)
+                        .setTitle(`New tweet by ${tweet[i].user.name}`)
+                        .setThumbnail(tweet[i].user.profile_image_url)
+                        .setURL(`https://twitter.com/statuses/${tweet[i].id_str}`)
+                        .setDescription(tweet[i].text)
+                        // .setImage(tweet[i].entities.media.media_url)
+                        .setTimestamp()
+                        .setFooter('Tweet Sent');
+                    for (j = 0; j < user.channels.length; j++) {
+                        client.channels.get(user.channels[j]).send({embed});
+                    }
+                    client.twitterDB.set(twitterHandle, tweet[i].id_str, 'last');
+                    return;
+                }
+            }
+        })
     }
 }
 

@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
 
     var stream = args[0].toLowerCase().replace(/[^0-9\_\-a-z]/g, '');
 
-    client.twitterDB.ensure(stream, {sent: false, channels: []});
+    client.twitterDB.ensure(stream, {last: "", channels: []});
 
     client.twitterDB.remove(stream, message.channel.id, 'channels');
     return message.channel.send(`Twitter account removed.`);
