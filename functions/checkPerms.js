@@ -1,10 +1,11 @@
 module.exports = (client, message, cmd) => {
+    var ownerid = process.env.ownerid || client.config.ownerid;
     if (message.channel.type == 'dm' || message.channel.type == 'group') {
         if (cmd.serverOnly) {
             return { run: false, msg: 'This command can only be run in a server.'};
         } else {
             if (cmd.ownerOnly) {
-                if (client.config.ownerid.includes(message.author.id)) {
+                if (ownerid.includes(message.author.id)) {
                     return { run: true, msg: ''};
                 } else {
                     return { run: false, msg: 'Only bot owners are allowed to run this command.'}; 
@@ -15,10 +16,10 @@ module.exports = (client, message, cmd) => {
         }
     }
 
-    if(cmd.ownerOnly && !client.config.ownerid.includes(message.author.id))
+    if(cmd.ownerOnly && !ownerid.includes(message.author.id))
         return { run: false, msg: 'Only bot owners are allowed to run this command.'}; 
 
-    if (client.config.ownerid.includes(message.author.id) ||
+    if (ownerid.includes(message.author.id) ||
         message.member.hasPermission('ADMINISTRATOR') ||
         message.member.hasPermission(cmd.requires, true, true)) {
         if (message.guild.member(client.user).hasPermission(cmd.botPermissions, true)) {
@@ -28,7 +29,7 @@ module.exports = (client, message, cmd) => {
             return {run: true, msg: ''};
         } else {
             if (!message.guild.member(client.user).hasPermission('SEND_MESSAGES', true)) {
-                client.users.get(client.config.ownerid[i]).send(`Client tried to run command without giving me permissions to reply [user: ${message.user.tag} | Server: ${message.guild.name}]`);
+                client.users.get(ownerid[i]).send(`Client tried to run command without giving me permissions to reply [user: ${message.user.tag} | Server: ${message.guild.name}]`);
                 return {run: false, msg: ''}
             } else {
                 reply = `I'm missing the required permission(s) to run this command.`;

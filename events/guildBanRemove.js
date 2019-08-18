@@ -9,7 +9,7 @@ module.exports = (client, guild, user) => {
         if (logServer) {
             const embed = new Discord.MessageEmbed()
             .setAuthor("User Ban Removed")
-            .setColor(client.config.embedcolor)
+            .setColor(process.env.embedcolor || client.config.embedcolor)
             .setImage(user.avatarURL({format: 'png', size: 2048}))
             .addField("Id", `${user.tag} (${user.id})`)
             .setFooter(time.stamp());

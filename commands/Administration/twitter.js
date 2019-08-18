@@ -1,9 +1,9 @@
 exports.run = async (client, message, args) => {
     if (!args[0])
-        return message.channel.send(`Please provide the name of the twitter account to monitor. Example: ${client.config.prefix}twitter tohur`);
+        return message.channel.send(`Please provide the name of the twitter account to monitor. Example: ${process.env.prefix || client.config.prefix}twitter tohur`);
 
     if (args[0].toLowerCase().includes('twitter.com'))
-        return message.channel.send(`please only put the name of the twitter account: ${client.config.prefix}twitter tohur`);
+        return message.channel.send(`please only put the name of the twitter account: ${process.env.prefix || client.config.prefix}twitter tohur`);
 
     var stream = args[0].toLowerCase().replace(/[^0-9\_\-a-z]/g, '');
 

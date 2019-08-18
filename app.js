@@ -70,9 +70,9 @@ client.userDBDefaults = {
     commandCount: 0
 }
 
-client.config = require('./config.js');
+client.config = require('./config.js') || require('./config.js.example');
 client.log = logger({
-    mode: client.config.loglevel
+    mode: process.env.loglevel || client.config.loglevel
 });
 client.time = require('./functions/time');
 client.checkPerms = require('./functions/checkPerms');
@@ -136,4 +136,4 @@ glob(`modules/*.js`, (err, files) => {
     });
 });
 
-client.login(client.config.token);
+client.login(process.env.token || client.config.token);

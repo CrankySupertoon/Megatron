@@ -3,11 +3,13 @@ module.exports = (client, message, oldMessage) => {
     if (message.author.bot || message.system || message.author.id === client.user.id) return;
     if(oldMessage && message.content === oldMessage.content) return;
     // Do they use the prefix or @Mention me?
-    const escapedPrefix = client.config.prefix.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&'); //escape particular characters
+    var prefix = process.env.prefix || client.config.prefix;
+    const escapedPrefix = prefix.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&'); //escape particular characters
     const prefixOrMention = new RegExp(`^(<@!?${client.user.id}>\\s+(?:${escapedPrefix}\\s*)?|${escapedPrefix}\\s*)`, 'i');
     if (!prefixOrMention.test(message.content)){
         if (!message.guild) { //just a fun method of logging messages and images sent to the bot in DM 
-            client.users.fetch(client.config.ownerid[0], true)
+            var ownerid = process.env.ownerid || client.config.ownerid;
+            client.users.fetch(ownerid[0], true)
                 .then(function (user) {
                     var attachments = "";
                     message.attachments.forEach(function(at) {
