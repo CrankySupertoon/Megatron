@@ -23,7 +23,7 @@ module.exports = (client, message) => {
             //console.log(message)
             var embed = new Discord.MessageEmbed()
                 .setAuthor(`Message deleted in #${message.channel.name}`)
-                .setColor(process.env.embedcolor)
+                .setColor('#16755385')
                 //.addField("Message By:", `${message.author.tag} (${message.author.id})`)
                 .setDescription(`${message.author.tag} (${message.author.id})`)
                 .addField(`Message: (${message.id})`, msg)
