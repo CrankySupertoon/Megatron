@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
     }
     const embed = new Discord.MessageEmbed()
         .setAuthor(arg.join(' '), "https://toontownrewritten.com/assets/images/base/logo_eyes.png", cog.wiki)
-        .setColor(0x376787845)
+        .setColor(3066993)
         .setTitle(cog.type)
         .setThumbnail(cog.picture)
         .addField("Levels", cog.level, true)

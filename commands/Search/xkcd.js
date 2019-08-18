@@ -9,7 +9,7 @@ function postComic(message, json, client) {
 
     const embed = new Discord.MessageEmbed()
         .setAuthor(json.safe_title, "", `https://xkcd.com/${json.num}/`)
-        .setColor(0x376787845)
+        .setColor(3066993)
         .setImage(json.img)
         .setFooter("xkcd", "https://xkcd.com/s/0b7742.png");
     message.channel.send({embed});

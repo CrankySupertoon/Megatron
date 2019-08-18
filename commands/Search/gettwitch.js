@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
             ch = json.stream;
             const embed = new Discord.MessageEmbed()
                 .setAuthor(ch.channel.status, null, ch.channel.url)
-                .setColor(0x376787845)
+                .setColor(3066993)
                 .setTitle(`${ch.channel.display_name}\n${ch.channel.url}`)
                 .setURL(ch.channel.url)
                 .setThumbnail(ch.channel.logo)
