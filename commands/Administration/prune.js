@@ -18,7 +18,7 @@ exports.run = async (client, message, args) => {
                 if (logServer) {
                     const embed = new Discord.MessageEmbed()
                         .setAuthor("Bulk Message Deletion")
-                        .setColor('16755385')
+                        .setColor(0x376787845)
                         .addField("Deleted By", `${message.author.tag} (${message.author.id})`)
                         .setFooter(time.stamp());
                     logServer.send({embed});

@@ -10,7 +10,7 @@ module.exports = (client, oldUser, newUser) => {
         if (oldUser.tag !== newUser.tag) { // check for username change 
             const embed = new Discord.MessageEmbed()
                 .setAuthor("User Tag Changed")
-                .setColor('16755385')
+                .setColor(0x376787845)
                 .addField(newUser.tag, `(${newUser.id})`)
                 .addField("Old: ", oldUser.tag)
                 .addField("New: ", newUser.tag)

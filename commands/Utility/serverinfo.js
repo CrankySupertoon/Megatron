@@ -4,7 +4,7 @@ exports.run = async (client, message, args) => {
     const embed = new Discord.MessageEmbed()
         .setDescription(`${message.guild.name}'s Information and Details`)
         .setThumbnail(message.guild.iconURL())
-        .setColor('16755385')
+        .setColor(0x376787845)
         .setFooter(message.guild.owner.user.tag, message.guild.owner.user.avatarURL())
         .addField('Members', `${message.guild.members.filter(member => member.user.bot).size} bots of ${message.guild.memberCount} members.`)
         .addField('Channels', `${message.guild.channels.filter(chan => chan.type === 'voice').size} voice / ${message.guild.channels.filter(chan => chan.type === 'text').size} text`)

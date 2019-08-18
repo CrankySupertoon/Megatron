@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
             });*/
             const embed = new Discord.MessageEmbed()
                 .setAuthor("oboobs.ru", "", "http://oboobs.ru")
-                .setColor('16755385')
+                .setColor(0x376787845)
                 .setImage(`http://media.oboobs.ru/${json[0].preview}`)
                 .setFooter(`Request by: ${message.author.tag}`);
             message.channel.send({embed});
