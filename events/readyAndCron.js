@@ -22,6 +22,7 @@ function eventTimer(client) {
     twitterFeeds(client);
     checkTwitchStreams(client);
     checkMixerStreams(client);
+    client.log.info(process.env.embedcolor);
 }
 
 function setRandomActivity(client) {
