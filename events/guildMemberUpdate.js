@@ -23,7 +23,7 @@ module.exports = (client, oldMember, newMember) => {
                 //console.log(role);
                 const embed = new Discord.MessageEmbed()
                     .setAuthor(addorremoved)
-                    .setColor(process.env.embedcolor || client.config.embedcolor)
+                    .setColor(process.env.embedcolor)
                     .addField(newMember.user.tag, `(${newMember.id})`)
                     .setFooter(time.stamp());
                     if(addorremoved === "Role Added") {
@@ -58,7 +58,7 @@ module.exports = (client, oldMember, newMember) => {
                 }
                 const embed = new Discord.MessageEmbed()
                     .setAuthor(namec)
-                    .setColor(process.env.embedcolor || client.config.embedcolor)
+                    .setColor(process.env.embedcolor)
                     .addField(newMember.user.tag, `(${newMember.id})`)
                     .addField("Old: ", oldn)
                     .addField("New: ", newn)
@@ -67,7 +67,7 @@ module.exports = (client, oldMember, newMember) => {
             } else { // idk what changed, log for debugging
                 const embed = new Discord.MessageEmbed()
                     .setAuthor("Something changed for this user but I'm not sure what.")
-                    .setColor(process.env.embedcolor || client.config.embedcolor)
+                    .setColor(process.env.embedcolor)
                     .addField(newMember.user.tag, `(${newMember.id})`)
                     .setFooter(time.stamp());
                 logServer.send({embed});

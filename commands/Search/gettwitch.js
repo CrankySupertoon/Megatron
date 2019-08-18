@@ -3,18 +3,18 @@ const Discord = require('discord.js');
 
 exports.run = async (client, message, args) => {
     if (!args[0]) {
-        return message.channel.send(`Please provide the name of the channel to search. Example: ${process.env.prefix || client.config.prefix}twitch tohur`);
+        return message.channel.send(`Please provide the name of the channel to search. Example: ${process.env.prefix}twitch tohur`);
     }
     var stream = args[0].replace(/[^0-9\.\_\-a-zA-Z]/g, '');
     fetch(`https://api.twitch.tv/kraken/streams/${stream}`, {
-            headers: { 'Client-ID': process.env.twitchClientId || client.config.twitchClientId },
+            headers: { 'Client-ID': process.env.twitchClientId },
         }).then(res => res.json()).then(json => {
             if (json.stream == null)
                 return message.channel.send(`Stream either is offline or doesn't exist`);
             ch = json.stream;
             const embed = new Discord.MessageEmbed()
                 .setAuthor(ch.channel.status, null, ch.channel.url)
-                .setColor(process.env.embedcolor || client.config.embedcolor)
+                .setColor(process.env.embedcolor)
                 .setTitle(`${ch.channel.display_name}\n${ch.channel.url}`)
                 .setURL(ch.channel.url)
                 .setThumbnail(ch.channel.logo)

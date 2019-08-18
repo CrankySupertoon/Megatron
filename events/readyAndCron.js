@@ -7,11 +7,9 @@ var cron;
 
 module.exports = (client) => {
     client.log.info(`Logged in as ${client.user.tag}!`);
-    if (process.env.ownerlogging || client.config.ownerlogging) {
-        var ownerid = process.env.ownerid || client.config.ownerid;
-        for (i = 0; i < ownerid.length; i++) {
-            client.users.get(ownerid[i]).send(`I am now online.`);
-        }
+    if (process.env.ownerlogging) {
+        var ownerid = process.env.ownerid;
+        client.users.get(ownerid).send(`I am now online.`);
     }
     if (!cron) {
         setInterval(eventTimer, 1000 * 60, client);
@@ -27,16 +25,15 @@ function eventTimer(client) {
 }
 
 function setRandomActivity(client) {
-    var acts = process.env.statusList || client.config.statusList;
-    if (acts.length >= 1) {
-        client.user.setActivity(acts[Math.floor(Math.random() * acts.length)]);
-    }
+
+    client.user.setActivity(`${process.env.prefix}help` ,'games');
+
 }
 
 function discordBotlist(client) {
-    if (process.env.DBLCOM_BOT_ID || client.config.DBLCOM_BOT_ID !== "" && process.env.DBLCOM_TOKEN || client.config.DBLCOM_TOKEN !== "") {
-        superagent.post(`https://discordbotlist.com/api/bots/${process.env.DBLCOM_BOT_ID || client.config.DBLCOM_BOT_ID}/stats`)
-            .set("Authorization", `Bot ${process.env.DBLCOM_TOKEN || client.config.DBLCOM_TOKEN}`)
+    if (process.env.DBLCOM_BOT_ID !== "" && process.env.DBLCOM_TOKEN !== "") {
+        superagent.post(`https://discordbotlist.com/api/bots/${process.env.DBLCOM_BOT_ID}/stats`)
+            .set("Authorization", `Bot ${process.env.DBLCOM_TOKEN}`)
             .send({
                 shard_id: 0,
                 guilds: client.guilds.size,
@@ -52,10 +49,10 @@ function twitterFeeds(client) {
     // Twitter configuration
     const Twit = require('twit')
     const twitter = new Twit({
-        consumer_key: process.env.twitter_consumer_key || client.config.twitter_consumer_key,
-        consumer_secret: process.env.twitter_consumer_secret || client.config.twitter_consumer_secret,
-        access_token: process.env.twitter_token_key || client.config.twitter_token_key,
-        access_token_secret: process.env.twitter_token_secret || client.config.twitter_token_secret
+        consumer_key: process.env.twitter_consumer_key,
+        consumer_secret: process.env.twitter_consumer_secret,
+        access_token: process.env.twitter_token_key,
+        access_token_secret: process.env.twitter_token_secret
     })
     ////
     var twitterHandles = client.twitterDB.indexes;
@@ -81,7 +78,7 @@ function twitterFeeds(client) {
                     client.log.info('Tweet posted to discord');
                     const embed = new Discord.MessageEmbed()
                         .setAuthor(tweet[i].user.name)
-                        .setColor(process.env.embedcolor || client.config.embedcolor)
+                        .setColor(process.env.embedcolor)
                         .setTitle(`New tweet by ${tweet[i].user.name}`)
                         .setThumbnail(tweet[i].user.profile_image_url)
                         .setURL(`https://twitter.com/statuses/${tweet[i].id_str}`)
@@ -110,7 +107,7 @@ function checkTwitchStreams(client) {
             return;
         }
         fetch(`https://api.twitch.tv/kraken/streams/${chan}`, {
-            headers: {'Client-ID': process.env.twitchClientId || client.config.twitchClientId},
+            headers: {'Client-ID': process.env.twitchClientId},
         }).then(res => res.json()).then(json => {
             if (json.stream == null) {
                 if (user.sent)
@@ -122,7 +119,7 @@ function checkTwitchStreams(client) {
                 ch = json.stream;
                 const embed = new Discord.MessageEmbed()
                     .setAuthor(ch.channel.status, null, ch.channel.url)
-                    .setColor(process.env.embedcolor || client.config.embedcolor)
+                    .setColor(process.env.embedcolor)
                     .setTitle(`${ch.channel.display_name}\n${ch.channel.url}`)
                     .setURL(ch.channel.url)
                     .setThumbnail(ch.channel.logo)
@@ -152,7 +149,7 @@ function checkMixerStreams(client) {
             return;
         }
         fetch(`https://mixer.com/api/v1/channels/${chan}`, {
-            headers: {'Client-ID': process.env.mixerClientId || client.config.mixerClientId},
+            headers: {'Client-ID': process.env.mixerClientId},
         }).then(res => res.json()).then(json => {
             if (json.online == false) {
                 if (user.sent)
@@ -165,7 +162,7 @@ function checkMixerStreams(client) {
                 Url = `https://mixer.com/${chan}`;
                 const embed = new Discord.MessageEmbed()
                     .setAuthor(ch.name, null, Url)
-                    .setColor(process.env.embedcolor || client.config.embedcolor)
+                    .setColor(process.env.embedcolor)
                     .setTitle(`${ch.user.username}\n${Url}`)
                     .setURL(Url)
                     .setThumbnail(ch.user.avatarUrl)

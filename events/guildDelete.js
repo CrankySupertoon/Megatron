@@ -2,10 +2,10 @@ const Discord = require('discord.js');
 const time = require('../functions/time');
 
 module.exports = (client, guild) => {
-    var ownerid = process.env.ownerid || client.config.ownerid;
-    client.users.fetch(ownerid[0]).then( user => {
+    var ownerid = process.env.ownerid;
+    client.users.fetch(ownerid).then( user => {
         const embed = new Discord.MessageEmbed()
-        .setColor(process.env.embedcolor || client.config.embedcolor)
+        .setColor(process.env.embedcolor)
         .setAuthor('Server Deleted/Left')
         .addField('Name', `${guild.name}`)
         .addField('ID', `${guild.id}`)
