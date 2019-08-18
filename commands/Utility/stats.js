@@ -4,7 +4,7 @@ const pkg = require('../../package.json');
 exports.run = async (client, message, args) => {
     const embed = new Discord.MessageEmbed()
         .setDescription(`status and info`)
-        .setColor('#16755385')
+        .setColor('16755385')
         .setAuthor(client.user.tag, '', pkg.homepage)
         .setThumbnail(`https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png?size=256`)
         .setFooter('Created: ' + client.time.stamp())

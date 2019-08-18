@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
             });*/
             const embed = new Discord.MessageEmbed()
                 .setAuthor("random.cat", "", "http://random.cat")
-                .setColor('#16755385')
+                .setColor('16755385')
                 .setImage(json.file)
                 .setFooter(`Request by: ${message.author.tag}`);
             message.channel.send({embed});
