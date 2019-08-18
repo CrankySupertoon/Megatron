@@ -5,7 +5,7 @@ exports.run = async (client, message, args) => {
     var now = Date.now();
     message.channel.send('Generating Documents.');
     client.log.info("Generating Docs..");
-    var num = 1, cl = "", template = fs.readFileSync('./docs/CmdListTemplate.html', "utf8"), pre = process.env.prefix;
+    var num = 1, cl = "", template = fs.readFileSync('./docs/CmdListTemplate.html', "utf8"), pre = client.config.prefix;
     client.commands.map(cmd => {
         cl += `<div class="command" id="${num}" data-module="${cmd.info.module.toLocaleLowerCase()}"><div class="command-name">`;
         cl += `<span>${pre}${cmd.info.name}</span>`;

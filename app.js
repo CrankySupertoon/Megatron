@@ -1,11 +1,7 @@
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
 const glob = require('glob');
 const logger = require('logger');
 const Discord = require('discord.js');
 const Enmap = require("enmap");
-
 const client = new Discord.Client({
     //disableEveryone: true,
     disabledEvents: [
@@ -74,8 +70,9 @@ client.userDBDefaults = {
     commandCount: 0
 }
 
+client.config = require('./config.js');
 client.log = logger({
-    mode: process.env.loglevel
+    mode: client.config.loglevel
 });
 client.time = require('./functions/time');
 client.checkPerms = require('./functions/checkPerms');
@@ -139,4 +136,4 @@ glob(`modules/*.js`, (err, files) => {
     });
 });
 
-client.login(process.env.token);
+client.login(client.config.token);

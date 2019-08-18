@@ -2,10 +2,9 @@ const Discord = require('discord.js');
 const time = require('../functions/time');
 
 module.exports = (client, guild) => {
-    var ownerid = process.env.ownerid;
-    client.users.fetch(ownerid).then( user => {
+    client.users.fetch(client.config.ownerid[0]).then( user => {
         const embed = new Discord.MessageEmbed()
-            .setColor(process.env.embedcolor)
+            .setColor(client.config.embedcolor)
             .setAuthor('Server Joined')
             .addField('Name', `${guild.name}`)
             .addField('ID', `${guild.id}`)

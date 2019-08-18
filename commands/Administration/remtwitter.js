@@ -1,9 +1,9 @@
 exports.run = async (client, message, args) => {
     if (!args[0])
-        return message.channel.send(`Please provide the name of the twitter account to remove. Example: ${process.env.prefix}remtwitter tohur`);
+        return message.channel.send(`Please provide the name of the twitter account to remove. Example: ${client.config.prefix}remtwitter tohur`);
 
     if (args[0].toLowerCase().includes('mixer.com'))
-        return message.channel.send(`please only put the name of the twitter account example: ${process.env.prefix}remtwitter tohur`);
+        return message.channel.send(`please only put the name of the twitter account example: ${client.config.prefix}remtwitter tohur`);
 
     var stream = args[0].toLowerCase().replace(/[^0-9\_\-a-z]/g, '');
 

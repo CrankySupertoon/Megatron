@@ -1,8 +1,8 @@
 const { inspect } = require('util');
 
 exports.run = async (client, message, args) => {
-    var ownerid = process.env.ownerid;
-    if (message.author.id !== ownerid[0]) return;
+
+    if (message.author.id !== client.config.ownerid[0]) return;
     
     let evaled;
     try {
