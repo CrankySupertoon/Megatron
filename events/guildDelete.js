@@ -5,7 +5,7 @@ module.exports = (client, guild) => {
     var ownerid = process.env.ownerid;
     client.users.fetch(ownerid).then( user => {
         const embed = new Discord.MessageEmbed()
-        .setColor(`#${process.env.embedcolor}`)
+        .setColor(process.env.embedcolor)
         .setAuthor('Server Deleted/Left')
         .addField('Name', `${guild.name}`)
         .addField('ID', `${guild.id}`)

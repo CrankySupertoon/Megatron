@@ -78,7 +78,7 @@ function twitterFeeds(client) {
                     client.log.info('Tweet posted to discord');
                     const embed = new Discord.MessageEmbed()
                         .setAuthor(tweet[i].user.name)
-                        .setColor(`#${process.env.embedcolor}`)
+                        .setColor(process.env.embedcolor)
                         .setTitle(`New tweet by ${tweet[i].user.name}`)
                         .setThumbnail(tweet[i].user.profile_image_url)
                         .setURL(`https://twitter.com/statuses/${tweet[i].id_str}`)
@@ -119,7 +119,7 @@ function checkTwitchStreams(client) {
                 ch = json.stream;
                 const embed = new Discord.MessageEmbed()
                     .setAuthor(ch.channel.status, null, ch.channel.url)
-                    .setColor(`#${process.env.embedcolor}`)
+                    .setColor(process.env.embedcolor)
                     .setTitle(`${ch.channel.display_name}\n${ch.channel.url}`)
                     .setURL(ch.channel.url)
                     .setThumbnail(ch.channel.logo)
@@ -162,7 +162,7 @@ function checkMixerStreams(client) {
                 Url = `https://mixer.com/${chan}`;
                 const embed = new Discord.MessageEmbed()
                     .setAuthor(ch.name, null, Url)
-                    .setColor(`#${process.env.embedcolor}`)
+                    .setColor(process.env.embedcolor)
                     .setTitle(`${ch.user.username}\n${Url}`)
                     .setURL(Url)
                     .setThumbnail(ch.user.avatarUrl)

@@ -12,7 +12,7 @@ module.exports = (client, member) => {
         if (logServer) {
             const embed = new Discord.MessageEmbed()
                 .setAuthor("User joined")
-                .setColor(`#${process.env.embedcolor}`)
+                .setColor(process.env.embedcolor)
                 .setImage(member.user.avatarURL({format: 'png', size: 2048}))
                 .addField("Id", `${member.user.tag} (${member.user.id})`)
                 .addField("Joined Discord", time.stamp(new Date(member.user.createdTimestamp)), true)
