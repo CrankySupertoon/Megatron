@@ -18,7 +18,7 @@ exports.run = async (client, message, args) => {
         message.channel.send(cpumsg).catch(client.log.error(err));
     } else {
         const embed = new Discord.MessageEmbed()
-        .setColor(3066993)
+        .setColor(process.env.embedcolor)
         .setAuthor('System Information')
         .addField('Uptime', `${client.time.sinceMs(os.uptime()*1000)}`)
         .addField('Used Memory', `${Math.round((((os.totalmem() - os.freemem()) / 1000000) + 0.00001) * 100) / 100}mb`, true)

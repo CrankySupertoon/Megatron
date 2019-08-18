@@ -75,7 +75,7 @@ client.userDBDefaults = {
 }
 
 client.log = logger({
-    mode: process.env.loglevel || client.config.loglevel
+    mode: process.env.loglevel
 });
 client.time = require('./functions/time');
 client.checkPerms = require('./functions/checkPerms');
